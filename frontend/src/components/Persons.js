@@ -17,13 +17,20 @@ const Persons = ({persons, filter, setPersons}) => {
 		changePerson
 			.remove(event.target.id)
 			.then(response => {
+				console.log(response)
 				changePerson
 					.getAll()
-					.then(response => setPersons(response.data.filter(person => person.id !== userID)))
+					.then(response => {
+						console.log(response)
+						setPersons(response.filter(person => person.id !== userID))
+					})
+					.catch(error => {
+						alert("Delete Failed: User is no longer present in the database")
+					})
+			})
 			.catch(error => {
 				alert("Delete Failed: User is no longer present in the database")
 			})
-		})
 	}
 
 	return (

@@ -18,8 +18,11 @@ const errorHandler = (error, request, response, next) => {
   console.error(error)
   if (error.name === 'CastError') {
     response.status(400).send({ error: 'malformatted id' })
-    next(error)
-  }  
+  } else if (error.name === 'ValidationError') {
+	  return response.status(400).json({ error: error.message })
+  }
+
+  next(error)
 }
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
@@ -58,7 +61,7 @@ const generateId = () => {
     return maxId + 1
 }
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
     const body = request.body
     //console.log(body)
   
@@ -80,9 +83,12 @@ app.post('/api/persons', (request, response) => {
       number: body.number,      
     })
 
-    person.save().then(person => {
-      response.json(person)
+    person.save()
+		.then(person => {
+			response.json(person)
     })
+	.catch(error => next(error))
+
 })
 
 app.get('/', (request, response) => {
@@ -115,18 +121,21 @@ app.get('/api/persons/:id', (request, response, next) => {
       .catch(error => next(error))
 })
 
-app.put('/api/notes/:id', (request, response, next) => {
+app.put('/api/persons/:id', (request, response, next) => {
   const body = request.body
 
   const person = {
+	id: body.id,
     name: body.name,
-    number: body.number,
-    id: body.id
+    number: body.number
   }
 
-  PersonDocument.findByIdAndUpdate(request.params.id, note, {new: true})
+  console.log(person)
+
+  PersonDocument.findByIdAndUpdate(request.params.id, person, {new: true, runValidators: true, context: 'query'})
     .then(updatedPerson => {
-      response.json(updatedPerson)
+		console.log(updatedPerson)
+		response.json(updatedPerson)
     })
     .catch(error => next(error))
 })

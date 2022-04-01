@@ -1,5 +1,6 @@
 import Filter from './Filter'
 import changePerson from '../services/changePerson'
+//import { response } from 'express'
 
 const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewName, newNumber, setNewNumber, setErrorMessage}) => {
 
@@ -27,7 +28,7 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 			if (window.confirm(`${newName} is already in the phonebook, replace the existing number with the new number?`)) {
 				const i = persons.findIndex(person => person.name === newName)
 				console.log(i)
-				//console.log(persons[i])
+				console.log(persons[i])
 				const changedPerson = {
 					name: persons[i].name,
 					number: newNumber,
@@ -37,9 +38,13 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 				changePerson
 					.update(persons[i].id, changedPerson)
 					.then(response => {
+						console.log(response)
 						changePerson
 							.getAll()
-							.then(response => setPersons(response.data))
+							.then(response => {
+								console.log(response)
+								setPersons(response)
+							})
 					})
 					.catch(error => {
 						setErrorMessage(
@@ -68,17 +73,42 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 		//	})
 		changePerson
 			.create(person)
-		setPersons(persons.concat(person))
+			.then(response => {
+				console.log(response.data)
+				setPersons(persons.concat(response.data))
+				console.log(persons)
+				setErrorMessage(
+					`Added ${person.name}`
+				)
+				setTimeout(() => {
+					setErrorMessage(null)
+				}, 3000)
+				setNewName('')
+				setNewNumber('')
+			})
+			.catch(error => {
+				console.log(error.response)
+				setErrorMessage(
+					`ValidationError: Person validation failed.`
+				)
+				setTimeout(() => {
+					setErrorMessage(null)
+				}, 3000)
+				setNewName('')
+				setNewNumber('')
+			})
 
-		setErrorMessage(
-			`Added ${person.name}`
-		)
-		setTimeout(() => {
-			setErrorMessage(null)
-		}, 3000)
+		//setPersons(persons.concat(person))
 
-		setNewName('')
-		setNewNumber('')
+		//setErrorMessage(
+		//	`Added ${person.name}`
+		//)
+		//setTimeout(() => {
+		//	setErrorMessage(null)
+		//}, 3000)
+//
+		//setNewName('')
+		//setNewNumber('')
 		//console.log('button clicked', event.target)
 	}
 

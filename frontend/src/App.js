@@ -9,7 +9,7 @@ const App = () => {
 	const [newName, setNewName] = useState('')
 	const [newNumber, setNewNumber] = useState('')
 	const [newFilter, setFilter] = useState('')
-	const [errorMessage, setErrorMessage] = useState('Notifications will be displayed here')
+	const [errorMessage, setErrorMessage] = useState(null)
 
 	useEffect(() => {
 		console.log('effect')
