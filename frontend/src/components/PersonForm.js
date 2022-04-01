@@ -21,7 +21,7 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 	const addPerson = (event) => {
 		event.preventDefault()
 		//console.log(newName)
-		//console.log(persons)
+		console.log(persons)
 		let names = persons.map(person => person.name)
 		if (names.includes(newName)) {
 			if (window.confirm(`${newName} is already in the phonebook, replace the existing number with the new number?`)) {
@@ -56,7 +56,7 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 		const person = {
 			name: newName,
 			number: newNumber,
-			id: persons.length + 1,
+			//id: persons.length + 1,
 		}
 		//axios
 		//	.post('http://localhost:3001/persons', person)
