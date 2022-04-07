@@ -125,6 +125,24 @@ test('a blog without a title is not added to db', async () => {
     expect(response.body).toHaveLength(initialBlogs.length)
 })
 
+test('every blog has a unique identifier', async () => {
+    const response = await api.get('/api/blogs')
+	response.body.forEach(blog => expect(blog.id).toBeDefined())
+    expect(response.body).toHaveLength(initialBlogs.length)
+})
+
+test('every blog has a number of likes', async () => {
+    const response = await api.get('/api/blogs')
+	response.body.forEach(blog => {
+		if (blog.likes === undefined) {
+			expect(blog.likes).toBe(0)
+		} else {
+			expect(blog.likes).toBe(blog.likes)
+		}
+	})
+    expect(response.body).toHaveLength(initialBlogs.length)
+})
+
 afterAll(() => {
     mongoose.connection.close()
 })
