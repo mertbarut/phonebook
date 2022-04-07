@@ -91,11 +91,19 @@ test('the first blog has a specific title', async () => {
 })
 
 test('a valid blog can be added', async () => {
+	await User.deleteMany({})
+  
+	const passwordHash = await bcrypt.hash('sekret', 10)
+	const user = new User({ username: 'root', passwordHash })
+
+	await user.save()
+
     const newBlog = {
         title: "42 ways async/await simplify making async calls",
         author: "John R. Gallup",
         url: "http://example.com",
         likes: 5,
+		userId: user.id
     }
 
     await api
@@ -113,20 +121,6 @@ test('a valid blog can be added', async () => {
     )
 })
 
-test('a blog without a title is not added to db', async () => {
-    const newBlog = {
-        author: "Mr. Nobody"
-    }
-
-    await api
-        .post('/api/blogs')
-        .send(newBlog)
-        .expect(400)
-
-    const response = await api.get('/api/blogs')
-
-    expect(response.body).toHaveLength(initialBlogs.length)
-})
 
 test('every blog has a unique identifier', async () => {
     const response = await api.get('/api/blogs')
