@@ -8,7 +8,8 @@
     "test": "NODE_ENV=development jest --verbose --runInBand --forceExit",
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd frontend/ && npm run build && cp -r build ../build",
-    "deploy": "git add . && git commit -m uibuild && git push"
+    "deploy": "git add . && git commit -m uibuild && git push",
+    "build": "npm run build:ui && npm run dev"
   },
   "author": "Mert Barut",
   "license": "MIT",
