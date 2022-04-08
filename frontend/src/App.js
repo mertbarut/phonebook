@@ -6,6 +6,9 @@ import changePerson from './services/changePerson'
 import Notification from './components/Notification'
 import axios from 'axios'
 
+import Blog from './components/Blog'
+import blogService from './services/blogs'
+
 const App = () => {
 	const [persons, setPersons] = useState([])
 	const [newName, setNewName] = useState('')
@@ -14,7 +17,8 @@ const App = () => {
 	const [errorMessage, setErrorMessage] = useState(null)
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const [user, setUser] = useState(null) 
+	const [user, setUser] = useState(null)
+	const [blogs, setBlogs] = useState([])
 
 	useEffect(() => {
 		console.log('effect')
@@ -26,6 +30,21 @@ const App = () => {
 		  })
 	}, [])
 
+	useEffect(() => {
+		const loggedUserJSON = window.localStorage.getItem('loggedAppUser')
+		if (loggedUserJSON) {
+			const user = JSON.parse(loggedUserJSON)
+			setUser(user)
+			changePerson.setToken(user.token)
+		}
+	}, [])
+
+	useEffect( async () => {
+		const blogs = await blogService.getAll()
+
+		setBlogs(blogs)
+	}, [])
+
 	const handleLogin = async (event) => {
 		event.preventDefault()
 
@@ -33,6 +52,12 @@ const App = () => {
 			const user = await loginService.login({
 				username, password,
 			})
+			console.log(user)
+			
+			window.localStorage.setItem(
+				'loggedAppUser', JSON.stringify(user)
+			)
+
 			changePerson.setToken(user.token)
 			setUser(user)
 			setUsername('')
@@ -60,7 +85,7 @@ const App = () => {
 		<div>
 		password
 			<input
-			type="text"
+			type="password"
 			value={password}
 			name="Password"
 			onChange={({target}) => setPassword(target.value)}
@@ -104,6 +129,12 @@ const App = () => {
 				filter={newFilter}
 				setPersons={setPersons}
 			/>
+			<div>
+				<h2>blogs</h2>
+				{blogs.map(blog =>
+					<Blog key={blog.id} blog={blog} />
+				)}
+			</div>
 		</div>
 	)
 }

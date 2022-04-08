@@ -7,7 +7,7 @@ usersRouter.get('/', async (request, response) => {
 		.find({}).populate('blogs')
 
 	response.json(users)
-  })
+})
 
 usersRouter.post('/', async (request, response) => {
 	const { username, name, password } = request.body
