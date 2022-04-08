@@ -6,7 +6,8 @@ import changePerson from './services/changePerson'
 import Notification from './components/Notification'
 import axios from 'axios'
 
-import Blog from './components/Blog'
+import Blogs from './components/Blogs'
+import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 
 const App = () => {
@@ -19,6 +20,9 @@ const App = () => {
 	const [password, setPassword] = useState('')
 	const [user, setUser] = useState(null)
 	const [blogs, setBlogs] = useState([])
+	const [newBlogTitle, setBlogTitle] = useState('')
+	const [newBlogAuthor, setBlogAuthor] = useState('')
+	const [newBlogUrl, setBlogUrl] = useState('')
 
 	useEffect(() => {
 		console.log('effect')
@@ -39,10 +43,10 @@ const App = () => {
 		}
 	}, [])
 
-	useEffect( async () => {
-		const blogs = await blogService.getAll()
-
-		setBlogs(blogs)
+	useEffect(() => {
+		blogService
+			.getAll()
+			.then(blogs => setBlogs(blogs))
 	}, [])
 
 	const handleLogin = async (event) => {
@@ -69,6 +73,20 @@ const App = () => {
 			}, 5000)
 		}
 		//console.log('logging in with', username, password)
+	}
+
+	const handleLogout = async (event) => {
+		event.preventDefault()
+	
+		window.localStorage.removeItem(
+			'loggedAppUser'
+		)
+
+		setErrorMessage('Logging out...')
+		setTimeout(() => {
+			setErrorMessage(null)
+			window.location.reload(false);
+		}, 2)
 	}
 
 	const loginForm = () => (
@@ -111,6 +129,20 @@ const App = () => {
 		/>
 	)
 
+	const blogForm = () => (
+		<BlogForm
+		setBlogs={setBlogs}
+		blogs={blogs}
+		setBlogTitle={setBlogTitle}
+		newBlogTitle={newBlogTitle}
+		setBlogAuthor={setBlogAuthor}
+		newBlogAuthor={newBlogAuthor}
+		setBlogUrl={setBlogUrl}
+		newBlogUrl={newBlogUrl}
+		setErrorMessage={setErrorMessage}
+		/>
+	)
+
 	return (
 		<div>
 			<h1>Phonebook</h1>
@@ -119,8 +151,9 @@ const App = () => {
 				? loginForm()
 				: 
 				<div>
-					<p>{user.name} logged-in</p>
+					<p>{user.name} logged-in <button onClick={handleLogout}>logout</button></p>
 					{personForm()}
+					{blogForm()}
 				</div>
 				}
 			<h2>Numbers</h2>
@@ -129,12 +162,7 @@ const App = () => {
 				filter={newFilter}
 				setPersons={setPersons}
 			/>
-			<div>
-				<h2>blogs</h2>
-				{blogs.map(blog =>
-					<Blog key={blog.id} blog={blog} />
-				)}
-			</div>
+			<Blogs blogs={blogs}/>
 		</div>
 	)
 }
