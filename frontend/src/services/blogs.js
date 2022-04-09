@@ -6,4 +6,8 @@ const getAll = async () => {
     return request.data
 }
 
-export default { getAll }
+const exportedObjects = {
+  getAll
+}
+
+export default exportedObjects

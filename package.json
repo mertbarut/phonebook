@@ -9,7 +9,8 @@
     "dev": "nodemon index.js",
     "build:ui": "rm -rf build && cd frontend/ && npm run build && cp -r build ../build",
     "deploy": "git add . && git commit -m uibuild && git push",
-    "re": "npm run build:ui && npm run dev"
+    "re": "npm run build:ui && npm run dev",
+	"eslint": "eslint . --fix"
   },
   "author": "Mert Barut",
   "license": "MIT",

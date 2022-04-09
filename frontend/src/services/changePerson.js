@@ -32,4 +32,6 @@ const remove = (id) => {
     return axios.delete(`${baseUrl}/${id}`)
 }
 
-export default { getAll, create, update, remove, setToken }
+const exportedObjects = { getAll, create, update, remove, setToken }
+
+export default exportedObjects

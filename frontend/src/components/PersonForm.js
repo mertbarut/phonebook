@@ -22,27 +22,27 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 	const addPerson = (event) => {
 		event.preventDefault()
 		//console.log(newName)
-		console.log(persons)
+		//console.log(persons)
 		let names = persons.map(person => person.name)
 		if (names.includes(newName)) {
 			if (window.confirm(`${newName} is already in the phonebook, replace the existing number with the new number?`)) {
 				const i = persons.findIndex(person => person.name === newName)
-				console.log(i)
-				console.log(persons[i])
+				//console.log(i)
+				//console.log(persons[i])
 				const changedPerson = {
 					name: persons[i].name,
 					number: newNumber,
 					id: persons[i].id,
 				}
-				console.log(changedPerson)
+				//console.log(changedPerson)
 				changePerson
 					.update(persons[i].id, changedPerson)
 					.then(response => {
-						console.log(response)
+						//console.log(response)
 						changePerson
 							.getAll()
 							.then(response => {
-								console.log(response)
+								//console.log(response)
 								setPersons(response)
 							})
 					})
@@ -74,9 +74,9 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 		changePerson
 			.create(person)
 			.then(response => {
-				console.log(response.data)
+				//console.log(response.data)
 				setPersons(persons.concat(response.data))
-				console.log(persons)
+				//console.log(persons)
 				setErrorMessage(
 					`Added ${person.name}`
 				)
@@ -87,7 +87,7 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 				setNewNumber('')
 			})
 			.catch(error => {
-				console.log(error.response)
+				//console.log(error.response)
 				setErrorMessage(
 					`ValidationError: Person validation failed.`
 				)

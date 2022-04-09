@@ -7,7 +7,7 @@ const Persons = ({persons, filter, setPersons}) => {
 	)
 
 	const handleDeletePerson = (event) => {
-		console.log(event.target.id)
+		//console.log(event.target.id)
 		if (window.confirm(`Delete ${event.target.name}?`))
 			deletePerson(event)
 	}
@@ -17,11 +17,11 @@ const Persons = ({persons, filter, setPersons}) => {
 		changePerson
 			.remove(event.target.id)
 			.then(response => {
-				console.log(response)
+				//console.log(response)
 				changePerson
 					.getAll()
 					.then(response => {
-						console.log(response)
+						//console.log(response)
 						setPersons(response.filter(person => person.id !== userID))
 					})
 					.catch(error => {

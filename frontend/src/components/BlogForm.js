@@ -1,6 +1,6 @@
 import changeBlog from '../services/changeBlog'
 
-const BlogForm = ({blogs, setBlogs, setBlogTitle, newBlogTitle, setBlogAuthor, newBlogAuthor, setBlogUrl, newBlogUrl, setErrorMessage}) => {
+const BlogForm = ({blogs, setBlogs, blogFormRef, setBlogTitle, newBlogTitle, setBlogAuthor, newBlogAuthor, setBlogUrl, newBlogUrl, setErrorMessage}) => {
 
 	const handleNewBlogTitle = (event) => {
 		setBlogTitle(event.target.value)
@@ -13,14 +13,16 @@ const BlogForm = ({blogs, setBlogs, setBlogTitle, newBlogTitle, setBlogAuthor, n
     const handleNewBlogUrl = (event) => {
 		setBlogUrl(event.target.value)
 	}
-
+	
 	const addBlog = (event) => {
 		event.preventDefault()
 		const blog = {
 			title: newBlogTitle,
 			author: newBlogAuthor,
 			url: newBlogUrl,
+			likes: 0
 		}
+		blogFormRef.current.toggleVisibility()
 		changeBlog
 			.create(blog)
 			.then(response => {

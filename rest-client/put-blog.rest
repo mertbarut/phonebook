@@ -1,0 +1,14 @@
+PUT http://localhost:3001/api/blogs/625195e3fff2b8ad9a853190
+Content-Type: application/json
+
+{
+  "title": "2222",
+  "author": "1111",
+  "url": "1111",
+  "likes": 1,
+  "user": {
+    "_id": "6250569e99ceaf18ab9524fe",
+    "username": "mbarut",
+    "name": "Mert Barut"
+  }
+}
