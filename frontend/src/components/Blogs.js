@@ -14,13 +14,13 @@ const Blog = ({blog, handleNewLike, blogViewRef, handleDeleteBlog, user}) => {
 				<br/>
 				{blog.url}
 				<br/>
-				likes: {blog.likes} <button id={blog.id} onClick={handleNewLike}>like</button>
+				likes: {blog.likes} <button id={blog.id} className='like-button' onClick={handleNewLike}>like</button>
 				<br/>
 				Added by: {blog.user.name}
 				<br/>
 				{user.username === blog.user.username
 					?
-					<button id={blog.id} onClick={handleDeleteBlog}>delete</button>
+					<button id={blog.id} className='delete-button' onClick={handleDeleteBlog}>delete</button>
 					:
 					<br/>
 				}

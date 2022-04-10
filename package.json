@@ -10,7 +10,8 @@
     "build:ui": "rm -rf build && cd frontend/ && npm run build && cp -r build ../build",
     "deploy": "git add . && git commit -m uibuild && git push",
     "re": "npm run build:ui && npm run dev",
-	"eslint": "eslint . --fix"
+    "eslint": "eslint . --fix",
+    "start:test": "npm run build:ui && cross-env NODE_ENV=test node index.js"
   },
   "author": "Mert Barut",
   "license": "MIT",
@@ -18,6 +19,7 @@
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
@@ -26,6 +28,10 @@
     "react-scripts": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.0.0",
+    "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"

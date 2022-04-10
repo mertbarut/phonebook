@@ -55,21 +55,26 @@ const BlogForm = ({blogs, setBlogs, blogFormRef, setBlogTitle, newBlogTitle, set
 			<h3>Add a new blog</h3>				
 			<div>
 				title: <input
+          id='new-blog-title'
 					value={newBlogTitle}
 					onChange={handleNewBlogTitle} />
 			</div>
 			<div>
 				author: <input
+          id='new-blog-author'
 					value={newBlogAuthor}
 					onChange={handleNewBlogAuthor} />
 			</div>
             <div>
 				url: <input
+          id='new-blog-url'
 					value={newBlogUrl}
 					onChange={handleNewBlogUrl} />
 			</div>
 			<div>
-				<button type="submit">create</button>
+				<button
+        id='new-blog-add-button'
+        type="submit">create</button>
 			</div>
 		</form>
 	)

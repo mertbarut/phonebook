@@ -7,7 +7,7 @@ const Notification = ({ message }) => {
     }
 
     return (
-        <div className='add-person'>
+        <div className='top-notification'>
             <em>{message}</em>
         </div>
     )

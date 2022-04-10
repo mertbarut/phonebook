@@ -197,4 +197,3 @@ describe('when there is initially one user at db', () => {
 afterAll(() => {
   mongoose.connection.close()
 })
-

@@ -119,19 +119,23 @@ const PersonForm = ({persons, setPersons, newFilter, setFilter, newName, setNewN
 	return (
 		<form onSubmit={addPerson}>
 			<Filter keyword={newFilter} setter={setFilter}/>
-			<h3>Add a new</h3>				
+			<h3>Add a new person to phonebook</h3>				
 			<div>
 				name: <input
+          id='new-person-name'
 					value={newName}
 					onChange={handleNewName} />
 			</div>
 			<div>
 				number: <input
+          id='new-person-number'
 					value={newNumber}
 					onChange={handleNewNumber} />
 			</div>
 			<div>
-				<button type="submit">add</button>
+				<button 
+        id='new-person-add-button'
+        type="submit">add</button>
 			</div>
 		</form>
 	)
