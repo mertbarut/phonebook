@@ -1,34 +1,41 @@
-import ReactDOM from 'react-dom'
+import ReactDOM, { render } from 'react-dom'
 import AppBlogs from './App'
 
 import { createStore } from 'redux'
 
-import Counter from './components/Counter'
+import { Provider } from 'react-redux'
 
-const counterReducer = (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    case 'ZERO':
-      return 0
-    default:
-      return state
-  }
-}
+import reviewReducer from './reducers/reviewCounter'
+import ReviewCounter from './components/ReviewCounter'
 
-const store = createStore(counterReducer)
+import anectodeReducer from './reducers/anectodeReducer'
+import AppAnectodes from './components/Anectodes'
+
+const reviewCounterStore = createStore(reviewReducer)
+const anecdoteStore = createStore(anectodeReducer)
 
 const renderBlogs = () => {
   ReactDOM.render(<AppBlogs />, document.getElementById('root'))
 }
 
-const renderCounter = () => {
-  ReactDOM.render(<Counter store={store}/>, document.getElementById('root'))
+const renderReviewCounter = () => {
+  ReactDOM.render(<ReviewCounter store={reviewCounterStore}/>, document.getElementById('root'))
 }
 
-//renderBlogs()
-renderCounter()
+const renderAnectodes = () => {
+  ReactDOM.render(
+    <Provider store={anecdoteStore}>
+      <AppAnectodes />
+    </Provider>,
+    document.getElementById('root')
+  )
+}
 
-store.subscribe(renderCounter)
+renderBlogs()
+//renderCounter()
+//renderReviewCounter()
+//renderAnectodes()
+
+//counterStore.subscribe(renderCounter)
+//reviewCounterStore.subscribe(renderReviewCounter)
+anecdoteStore.subscribe(renderAnectodes)

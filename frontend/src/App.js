@@ -207,12 +207,12 @@ const App = () => {
 						setPersons={setPersons}
 					/>
 					<Blogs
-					blogs={blogs}
-					setBlogs={setBlogs}
-					handleNewLike={handleNewLike}
-					handleDeleteBlog={handleDeleteBlog}
-					blogViewRef={blogViewRef}
-					user={user}
+						blogs={blogs}
+						setBlogs={setBlogs}
+						handleNewLike={handleNewLike}
+						handleDeleteBlog={handleDeleteBlog}
+						blogViewRef={blogViewRef}
+						user={user}
 					/>
 				</div>
 			}
