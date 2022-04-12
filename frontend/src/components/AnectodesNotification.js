@@ -1,4 +1,4 @@
-const AnectodesNotification = () => {
+const Notification = () => {
   const style = {
     border: 'solid',
     padding: 10,
@@ -11,4 +11,4 @@ const AnectodesNotification = () => {
   )
 }
 
-export default AnectodesNotification
+export default Notification

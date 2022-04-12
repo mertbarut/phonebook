@@ -42,7 +42,7 @@
   "devDependencies": {
     "@testing-library/user-event": "^14.0.4",
     "@types/deep-freeze": "^0.1.2",
-    "cypress": "^9.5.3",
+    "cypress": "^9.5.4",
     "jest-watch-typeahead": "^0.6.5"
   }
 }

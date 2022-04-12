@@ -17,10 +17,41 @@ const asObject = (anecdote) => {
   }
 }
 
+const initialState = anecdotesAtStart.map(asObject)
+
+const reducer = (state = initialState, action) => {
+  console.log('state now: ', state)
+  console.log('action', action)
+
+  switch(action.type) {
+    case 'NEW_ANECTODE':
+      return [...state, action.data]
+    case 'CAST_VOTE':
+      const id = action.data.id
+      const anectodeToVote = state.find(anecdote => anecdote.id === id)
+      const votedAnectode = {
+        ...anectodeToVote,
+        votes: anectodeToVote.votes + 1
+      }
+      return state.map(a =>
+        a.id !== id ? a : votedAnectode
+      )
+    default:
+      return state
+  }
+}
+
+const generateId = () =>
+  Number((Math.random() * 1000000).toFixed(0))
+
 export const createAnectode = (content) => {
   return {
     type: 'NEW_ANECTODE',
-    data: asObject(content)
+    data: {
+      content,
+      votes: 0,
+      id: generateId()
+    }
   }
 }
 
@@ -31,13 +62,4 @@ export const castVote = (id) => {
   }
 }
 
-const initialState = anecdotesAtStart.map(asObject)
-
-const anectodeReducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
-
-  return state
-}
-
-export default anectodeReducer
+export default reducer

@@ -11,7 +11,7 @@
     "deploy": "git add . && git commit -m uibuild && git push",
     "re": "npm run build:ui && npm run dev",
     "eslint": "eslint . --fix",
-    "start:test": "npm run build:ui && cross-env NODE_ENV=test node index.js"
+    "re-test": "npm run build:ui && cross-env NODE_ENV=test node index.js"
   },
   "author": "Mert Barut",
   "license": "MIT",

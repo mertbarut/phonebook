@@ -1,44 +1,46 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import AppBlogs from './App'
-
 import { createStore } from 'redux'
-
 import { Provider } from 'react-redux'
 
-import reviewReducer from './reducers/reviewCounter'
+/* React Component Imports */
+
+import AppBlogs from './App'
 import ReviewCounter from './components/ReviewCounter'
+import NoteApp from './components/NoteApp'
+import AnectodesApp from './components/AnectodeApp'
 
-import anectodeReducer from './reducers/anectodeReducer'
-import AppAnectodes from './components/Anectodes'
+/* Reducer Imports */
 
-import App from './NoteApp'
-
+import reviewReducer from './reducers/reviewCounter'
 import noteReducer from './reducers/noteReducer'
+import anectodeReducer from './reducers/anectodeReducer'
 
-const store = createStore(noteReducer)
-
-const reviewCounterStore = createStore(reviewReducer)
-const anecdoteStore = createStore(anectodeReducer)
+/* Blog * Phonebook App */
 
 const renderBlogs = () => {
   ReactDOM.render(<AppBlogs />, document.getElementById('root'))
 }
 
+renderBlogs()
+
+/* Review Counter App */
+
+const reviewCounterStore = createStore(reviewReducer)
+
 const renderReviewCounter = () => {
   ReactDOM.render(<ReviewCounter store={reviewCounterStore}/>, document.getElementById('root'))
 }
 
-const renderAnectodes = () => {
-    ReactDOM.render(
-      <Provider store={anecdoteStore}>
-        <AppAnectodes />
-    </Provider>,
-    document.getElementById('root')
-  )
-}
+//renderReviewCounter()
 
-store.dispatch({
+//reviewCounterStore.subscribe(renderReviewCounter)
+
+/* Note App */
+
+const noteStore = createStore(noteReducer)
+
+noteStore.dispatch({
   type: 'NEW_NOTE',
   data: {
     content: 'the app state is in redux store',
@@ -47,7 +49,7 @@ store.dispatch({
   }
 })
 
-store.dispatch({
+noteStore.dispatch({
   type: 'NEW_NOTE',
   data: {
     content: 'state changes are made with actions',
@@ -57,20 +59,28 @@ store.dispatch({
 })
 
 const renderNotes = () => {
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+  ReactDOM.render(
+    <Provider store={noteStore}>
+      <NoteApp />
+    </Provider>,
+    document.getElementById('root')
+  )
 }
 
-//renderBlogs()
-//renderCounter()
-//renderReviewCounter()
-//renderAnectodes()
-renderNotes()
+//renderNotes()
 
-//counterStore.subscribe(renderCounter)
-//reviewCounterStore.subscribe(renderReviewCounter)
-//anecdoteStore.subscribe(renderAnectodes)
+/* Anectode App */
+
+const anecdoteStore = createStore(anectodeReducer)
+
+const renderAnectodes = () => {
+  ReactDOM.render(
+    <Provider store={anecdoteStore}>
+      <AnectodesApp />
+    </Provider>,
+    document.getElementById('root')
+  )
+}
+
+//renderAnectodes()
+
