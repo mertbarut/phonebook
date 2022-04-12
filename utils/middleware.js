@@ -33,7 +33,7 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-const tokenExtractor = (request, response, next) => {
+const tokenExtractor = async (request, response, next) => {
   const authorization = request.get('authorization')
   //console.log(request)
   //console.log(authorization)

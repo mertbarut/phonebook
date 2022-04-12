@@ -5,7 +5,7 @@ const initialState = {
 }
   
 const reviewCounterReducer = (state = initialState, action) => {
-  console.log(action)
+  //console.log(action)
   switch (action.type) {
     case 'GOOD':
       state = { good: state.good + 1, ok: state.ok, bad: state.bad}

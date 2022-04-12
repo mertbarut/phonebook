@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 /* React Component Imports */
@@ -13,7 +14,8 @@ import AnectodesApp from './components/AnectodeApp'
 /* Reducer Imports */
 
 import reviewReducer from './reducers/reviewCounter'
-import noteReducer from './reducers/noteReducer'
+import noteDisplayReducer from './reducers/noteDisplayReducer'
+import noteFilterReducer from './reducers/noteFilterReducer'
 import anectodeReducer from './reducers/anectodeReducer'
 
 /* Blog * Phonebook App */
@@ -22,7 +24,7 @@ const renderBlogs = () => {
   ReactDOM.render(<AppBlogs />, document.getElementById('root'))
 }
 
-renderBlogs()
+//renderBlogs()
 
 /* Review Counter App */
 
@@ -38,23 +40,10 @@ const renderReviewCounter = () => {
 
 /* Note App */
 
-const noteStore = createStore(noteReducer)
-
-noteStore.dispatch({
-  type: 'NEW_NOTE',
-  data: {
-    content: 'the app state is in redux store',
-    important: true,
-    id: 1
-  }
-})
-
-noteStore.dispatch({
-  type: 'NEW_NOTE',
-  data: {
-    content: 'state changes are made with actions',
-    important: false,
-    id: 2
+const noteStore = configureStore({
+  reducer: {
+    notes: noteDisplayReducer,
+    filter: noteFilterReducer 
   }
 })
 
@@ -71,7 +60,11 @@ const renderNotes = () => {
 
 /* Anectode App */
 
-const anecdoteStore = createStore(anectodeReducer)
+const anecdoteStore = configureStore({
+  reducer: {
+    anecdotes: anectodeReducer
+  }
+})
 
 const renderAnectodes = () => {
   ReactDOM.render(
@@ -82,5 +75,4 @@ const renderAnectodes = () => {
   )
 }
 
-//renderAnectodes()
-
+renderAnectodes()

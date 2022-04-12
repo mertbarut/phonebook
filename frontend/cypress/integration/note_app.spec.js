@@ -56,6 +56,7 @@ describe('Phonebook app', function() {
         .contains('view').click()
         .get('.like-button')
         .as('theLikeButton')
+        .click()
       
       cy
         .get('.delete-button')

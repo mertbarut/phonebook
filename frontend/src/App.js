@@ -122,7 +122,6 @@ const App = () => {
 		await changeBlog.update(blogID, blog)
 		const newBlogs = await changeBlog.getAll()
 		setBlogs(newBlogs)
-
 	}
 
 	const handleDeleteBlog = (event) => {
