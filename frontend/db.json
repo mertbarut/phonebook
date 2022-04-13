@@ -1,0 +1,101 @@
+{
+  "anecdotes": [
+    {
+      "content": "If it hurts, do it more often",
+      "votes": 20,
+      "id": 1
+    },
+    {
+      "content": "Adding manpower to a late software project makes it later!",
+      "votes": 23,
+      "id": 2
+    },
+    {
+      "content": "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
+      "votes": 0,
+      "id": 3
+    },
+    {
+      "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+      "votes": 8,
+      "id": 4
+    },
+    {
+      "content": "Premature optimization is the root of all evil.",
+      "votes": 0,
+      "id": 5
+    },
+    {
+      "content": "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+      "votes": 0,
+      "id": 6
+    },
+    {
+      "content": "This is a meaningful anecdote",
+      "votes": 0,
+      "id": 8
+    },
+    {
+      "content": "This is another meaningful anecdote",
+      "votes": 0,
+      "id": 9
+    },
+    {
+      "content": "Hello there",
+      "votes": 0,
+      "id": 10
+    },
+    {
+      "content": "Is this working?",
+      "votes": 0,
+      "id": 11
+    },
+    {
+      "content": "Appearently",
+      "votes": 0,
+      "id": 12
+    },
+    {
+      "content": "!",
+      "votes": 0,
+      "id": 13
+    },
+    {
+      "content": "...",
+      "votes": 0,
+      "id": 14
+    }
+  ],
+  "notes": [
+    {
+      "content": "the app state is in redux store",
+      "important": true,
+      "id": 1
+    },
+    {
+      "content": "state changes are made with actions",
+      "important": false,
+      "id": 2
+    },
+    {
+      "content": "42",
+      "important": false,
+      "id": 3
+    },
+    {
+      "content": "42",
+      "important": false,
+      "id": 4
+    },
+    {
+      "content": "42",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "TEST",
+      "important": false,
+      "id": 6
+    }
+  ]
+}

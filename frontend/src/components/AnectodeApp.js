@@ -1,21 +1,27 @@
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createAnectode, castVote } from '../reducers/anectodeReducer'
+import { createAnecdote, castVote, setAnecdotes } from '../reducers/anectodeReducer'
+import anecdoteService from '../services/anecdotes'
+import { initializeAnecdotes, castVoteForAnecdote } from '../reducers/anectodeReducer'
 
 const App = () => {
   const anecdotes = useSelector(state => state.anecdotes)
   //console.log(anecdotes)
   const dispatch = useDispatch()
 
-  const vote = (id) => {
-    console.log('vote', id)
-    dispatch(castVote(id))
+  useEffect(() => {
+    dispatch(initializeAnecdotes())
+  }, [])
+
+  const vote = async (id) => {
+    dispatch(castVoteForAnecdote(id))
   }
 
-  const addAnectode = (event) => {
+  const addAnectode = async (event) => {
     event.preventDefault()
     const content = event.target.anectode.value
     event.target.anectode.value = ''
-    dispatch(createAnectode(content))
+    dispatch(createAnecdote(content))
   }
 
   return (

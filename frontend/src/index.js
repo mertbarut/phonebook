@@ -16,9 +16,14 @@ import MoviesApp from './components/MovieList'
 /* Reducer Imports */
 
 import reviewReducer from './reducers/reviewCounter'
-import noteDisplayReducer from './reducers/noteDisplayReducer'
+import noteDisplayReducer, { setNotes }  from './reducers/noteDisplayReducer'
 import noteFilterReducer from './reducers/noteFilterReducer'
-import anectodeReducer from './reducers/anectodeReducer'
+import anectodeReducer, { setAnecdotes } from './reducers/anectodeReducer'
+
+/* Services */
+
+import noteService from './services/notes'
+import anecdoteService from './services/anecdotes'
 
 /* Blog * Phonebook App */
 
@@ -48,6 +53,8 @@ const noteStore = configureStore({
     filter: noteFilterReducer 
   }
 })
+
+//noteService.getAll().then(notes => noteStore.dispatch(setNotes(notes)))
 
 const renderNotes = () => {
   ReactDOM.render(
@@ -99,4 +106,4 @@ const renderMovies = () => {
   )
 }
 
-renderMovies()
+//renderMovies()
