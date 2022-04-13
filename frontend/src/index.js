@@ -10,6 +10,8 @@ import AppBlogs from './App'
 import ReviewCounter from './components/ReviewCounter'
 import NoteApp from './components/NoteApp'
 import AnectodesApp from './components/AnectodeApp'
+import TicTacToe from './components/TicTacToe'
+import MoviesApp from './components/MovieList'
 
 /* Reducer Imports */
 
@@ -76,3 +78,25 @@ const renderAnectodes = () => {
 }
 
 renderAnectodes()
+
+/* TicTacToe */
+
+const renderTicTacToe = () => {
+  ReactDOM.render(
+    <TicTacToe />,
+    document.getElementById('root')
+  )
+}
+
+//renderTicTacToe()
+
+/* Movie List App */
+
+const renderMovies = () => {
+  ReactDOM.render(
+    <MoviesApp />,
+    document.getElementById('root')
+  )
+}
+
+renderMovies()
