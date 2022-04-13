@@ -21,11 +21,15 @@ const anectodeSlice = createSlice({
     },
     setAnecdotes(state, action) {
       return action.payload
+    },
+    removeAnecdotes(state, action) {
+      const id = action.payload
+      return state.filter(anecdote => anecdote.id !== id)
     }
   }
 })
 
-export const { castVote, appendAnecdote, setAnecdotes } = anectodeSlice.actions
+export const { castVote, appendAnecdote, setAnecdotes, removeAnecdotes } = anectodeSlice.actions
 
 export const initializeAnecdotes = () => {
   return async dispatch => {
@@ -45,6 +49,13 @@ export const castVoteForAnecdote = id => {
   return async dispatch => {
     const changedAnecdote = await anecdoteService.changeVotesById(id, 1)
     dispatch(castVote(id))
+  }
+}
+
+export const removeAnecdote = id => {
+  return async dispatch => {
+    await anecdoteService.deleteAnecdote(id)
+    dispatch(removeAnecdotes(id))
   }
 }
 

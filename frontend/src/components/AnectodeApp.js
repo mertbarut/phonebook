@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { createAnecdote, castVote, setAnecdotes } from '../reducers/anectodeReducer'
+import { createAnecdote, castVote, setAnecdotes, removeAnecdote } from '../reducers/anectodeReducer'
 import anecdoteService from '../services/anecdotes'
 import { initializeAnecdotes, castVoteForAnecdote } from '../reducers/anectodeReducer'
+import '../css/Anecdote.css'
 
 const App = () => {
   const anecdotes = useSelector(state => state.anecdotes)
@@ -24,24 +25,31 @@ const App = () => {
     dispatch(createAnecdote(content))
   }
 
+  const remove = async (id) => {
+    dispatch(removeAnecdote(id))
+  }
+
   return (
     <div>
-      <h2>Anecdotes</h2>
+      <h2 className='title'>Anecdotes </h2>
       {anecdotes.map(anecdote =>
-        <div key={anecdote.id}>
-          <div>
+        <div key={anecdote.id} className='anecdote'>
+          <div className='content'>
             {anecdote.content}
           </div>
-          <div>
-            has {anecdote.votes}
-            <button name='vote' onClick={() => vote(anecdote.id)}>vote</button>
+          <div className='votes'>
+            {anecdote.votes} votes
+            <div>
+              <button name='vote' id='vote' onClick={() => vote(anecdote.id)}>vote</button>
+              <button name='delete' id='delete' onClick={() => remove(anecdote.id)}>delete</button>
+            </div>
           </div>
         </div>
       )}
       <h2>create new</h2>
-      <form onSubmit={addAnectode}>
-        <div><input name="anectode" /></div>
-        <button type="submit">create</button>
+      <form onSubmit={addAnectode} className='creator'>
+        <div><textarea name="anectode" /></div>
+        <button type="submit" id='create'>create</button>
       </form>
     </div>
   )

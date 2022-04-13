@@ -23,11 +23,17 @@ const changeVotesById = async (id, count) => {
   const changedAnecdote = {...anectodeToChange, votes: anectodeToChange.votes + count}
   const response = await axios.put(`${baseUrl}/${id}`, changedAnecdote)
   return response.data
-} 
+}
+
+const deleteAnecdote = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`)
+  return response.data
+}
 
 export default { 
   getAll,
   createNew,
   getById,
-  changeVotesById
+  changeVotesById,
+  deleteAnecdote
 }
