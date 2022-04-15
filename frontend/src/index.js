@@ -31,7 +31,7 @@ const renderBlogs = () => {
   ReactDOM.render(<AppBlogs />, document.getElementById('root'))
 }
 
-//renderBlogs()
+renderBlogs()
 
 /* Review Counter App */
 
@@ -84,7 +84,7 @@ const renderAnectodes = () => {
   )
 }
 
-renderAnectodes()
+//renderAnectodes()
 
 /* TicTacToe */
 
