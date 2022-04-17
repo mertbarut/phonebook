@@ -25,13 +25,17 @@ import anectodeReducer, { setAnecdotes } from './reducers/anectodeReducer'
 import noteService from './services/notes'
 import anecdoteService from './services/anecdotes'
 
+/* Tailwind CSS */
+
+import './index.css'
+
 /* Blog * Phonebook App */
 
 const renderBlogs = () => {
   ReactDOM.render(<AppBlogs />, document.getElementById('root'))
 }
 
-renderBlogs()
+//renderBlogs()
 
 /* Review Counter App */
 
@@ -84,7 +88,7 @@ const renderAnectodes = () => {
   )
 }
 
-//renderAnectodes()
+renderAnectodes()
 
 /* TicTacToe */
 

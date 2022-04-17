@@ -27,7 +27,7 @@ const App = () => {
 	const [newBlogTitle, setBlogTitle] = useState('')
 	const [newBlogAuthor, setBlogAuthor] = useState('')
 	const [newBlogUrl, setBlogUrl] = useState('')
-	const [loginVisible, setLoginVisible] = useState(false)
+	const [message, setMessage] = useState(null) 
 
 	const blogFormRef = useRef()
 	const personFormRef = useRef()
@@ -75,6 +75,10 @@ const App = () => {
 			setUser(user)
 			setUsername('')
 			setPassword('')
+			setMessage(`Welcome, ${user.name}`)
+			setTimeout(() => {
+				setMessage(null)
+			}, 10000)
 			} catch (exception) {
 			setErrorMessage('Wrong Credentials')
 			setTimeout(() => {
@@ -141,15 +145,8 @@ const App = () => {
 	}
 
 	const loginForm = () => {
-		const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-		const showWhenVisible = { display: loginVisible ? '' : 'none' }
-	
 		return (
 		  <div>
-			<div style={hideWhenVisible}>
-			  <button onClick={() => setLoginVisible(true)}>log in</button>
-			</div>
-			<div style={showWhenVisible}>
 			  <LoginForm
 				username={username}
 				password={password}
@@ -157,16 +154,19 @@ const App = () => {
 				handlePasswordChange={({ target }) => setPassword(target.value)}
 				handleSubmit={handleLogin}
 			  />
-			  <button onClick={() => setLoginVisible(false)}>cancel</button>
 			</div>
-		  </div>
 		)
 	  }
 
+	const styles = {
+		header: "text-4xl text-center",
+		notification: "flex flex-col items-center mt-16",
+	}
+
 	return (
 		<div>
-			<h1>Phonebook</h1>
-			<Notification message={errorMessage} />
+			<h1 className={styles.header}>Phonebook</h1>
+			<Notification message={errorMessage} className={styles.notification}/>
 			{user === null
 				? loginForm()
 				: 
