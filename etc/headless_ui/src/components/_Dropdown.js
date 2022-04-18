@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-const DropdownMenu = () => {
+const _Dropdown = () => {
   return (
     <div className="w-56 text-right top-16">
       <Menu as="div" className="relative inline-block text-left">
@@ -370,4 +370,4 @@ function DeleteActiveIcon(props) {
   )
 }
 
-export default DropdownMenu
+export default _Dropdown

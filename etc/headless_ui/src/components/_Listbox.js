@@ -11,7 +11,7 @@ const people = [
   { name: 'Hellen Schmidt' },
 ]
 
-const ListboxSelect = () => {
+const _Listbox = () => {
   const [selected, setSelected] = useState(people[0])
 
   return (
@@ -70,4 +70,4 @@ const ListboxSelect = () => {
   )
 }
 
-export default ListboxSelect
+export default _Listbox
