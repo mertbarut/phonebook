@@ -4,7 +4,7 @@ import { ChevronUpIcon } from '@heroicons/react/solid'
 const _Disclosure = ({questions, answers}) => {
   return (
     <div>
-      <div className="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
+      <div className="w-full max-w-xs p-2 mx-auto bg-white rounded-2xl">
         <Disclosure>
           {({ open }) => (
             <>
