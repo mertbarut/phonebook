@@ -2,7 +2,10 @@ import { Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useTimeoutFn } from 'react-use'
 
-const _Transition = () => {
+import Timer from 'react-timer-wrapper';
+import Timecode from 'react-timecode';
+
+const _Transition = ({avatar, selected}) => {
   let [isShowing, setIsShowing] = useState(true)
   let [, , resetIsShowing] = useTimeoutFn(() => setIsShowing(true), 500)
 
@@ -20,7 +23,7 @@ const _Transition = () => {
           leaveTo="opacity-0 scale-95 "
         >
           <div className="w-full h-full bg-white rounded-md shadow-lg">
-            <p className="text-center text-8xl leading-tight"> 🖥️ </p>
+            <p className="text-center text-8xl leading-tight"> {avatar} </p>
           </div>
         </Transition>
       </div>
@@ -40,7 +43,11 @@ const _Transition = () => {
           />
         </svg>
 
-        <span className="ml-3">Click to transition</span>
+        <span className="ml-3">
+        <Timer active duration={selected.name.includes('Quantum') ? 61 * 1000 : 3600 * 1000}>
+          <Timecode />
+        </Timer>
+        </span>
       </button>
     </div>
   )

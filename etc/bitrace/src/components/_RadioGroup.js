@@ -19,7 +19,7 @@ const _RadioGroup = ({selected, setSelected, choices}) => {
                       : ''
                   }
                   ${
-                    checked ? 'bg-gradient-to-r from-blue-500 to-black bg-opacity-75 text-white' : 'bg-white'
+                    checked ? 'bg-gradient-to-r from-sky-400 to-blue-600 bg-opacity-75 text-white' : 'bg-slate-200'
                   }
                     relative rounded-lg shadow-md px-5 py-4 cursor-pointer flex focus:outline-none`
                 }

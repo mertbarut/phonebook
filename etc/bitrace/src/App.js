@@ -10,21 +10,25 @@ import _Popover from './components/_Popover'
 import _RadioGroup from './components/_RadioGroup'
 import _Tabs from './components/_Tabs';
 import _Transition from './components/_Transition';
-import Algorithm from './components/Algorithm'
+import ClassicalAlgorithm from './components/ClassicalAlgorithm'
+import QuantumAlgorithm from './components/QuantumAlgorithm'
+import CountUp from 'react-countup';
 
 import { useState } from 'react'
 
 const colorScheme = {
-  box1: "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
+  box1: "bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200",
   box2: "bg-gradient-to-r from-cyan-500 to-blue-500",
-  box3: "bg-gradient-to-r from-teal-500 to-sky-500",
+  box_main: "bg-gradient-to-b from-indigo-500 via-purple-500 to-sky-500",
   box4: "bg-gradient-to-r from-yellow-200 to-amber-400",
-  box5: "bg-white border-y-4 border-emerald-300",
-  box6: "bg-gradient-to-t from-rose-200 to-sky-400",
+  box5: "bg-slate-100 border-y-4 border-emerald-300",
+  box_confirmation: "bg-gradient-to-t from-rose-300 to-sky-500",
   box7: "bg-gradient-to-b from-orange-200 to-red-400",
-  box8: "bg-gradient-to-r from-cyan-300 to-sky-500",
-  box9: "bg-gradient-to-r from-red-300 to-orange-500",
+  box_choice: "bg-gradient-to-b from-amber-200 to-yellow-200",
+  box_info: "bg-slate-200",
   box10: "bg-gradient-to-r from-slate-500 to-slate-300",
+  box_quantum: "bg-gradient-to-b from-purple-500 to-violet-300",
+  box_classic: "bg-gradient-to-t from-yellow-200 to-amber-400",
 }
 
 const questions = [
@@ -40,12 +44,12 @@ const answers = [
 const choices = [
   {
     name: 'Mert\'s Classical Algorithm',
-    chip: 'Runs on a regular computer chip',
+    chip: 'Using Linear search',
     promotion: 'Perfect for old souls',
   },
   {
     name: 'Edgars\' Quantum Algorithm',
-    chip: 'Runs on a quantum chip',
+    chip: 'Using Grover\'s algorithm',
     promotion: 'Most popular among hipsters',
   }
 ]
@@ -89,39 +93,69 @@ const App = () => {
         {isSubmitted === true
           ?
             <div className="grid grid-cols-1 grid-rows-12 gap-5 grid-flow-row lg:grid-cols-1">
-              <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box10} border-transparent rounded-md shadow-md space-y-2`}>
-                <_Transition />
-              </div>
-              <Algorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
+              {selected.name.includes('Quantum')
+                ?
+                  <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box_quantum} border-transparent rounded-md shadow-md space-y-2`}>
+                    <_Transition avatar={'⚛️'} selected={selected}/>
+                    <CountUp 
+                      start={0}
+                      end={3600000}
+                      duration={2.75}
+                      separator=" "
+                      decimals={4}
+                      decimal=","
+                      prefix="EUR "
+                      suffix=" left"
+                      onEnd={() => console.log('Ended! 👏')}
+                      onStart={() => console.log('Started! 💨')}/>
+                    <QuantumAlgorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
+                  </div>
+                :
+                  <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box_classic} border-transparent rounded-md shadow-md space-y-2`}>
+                    <_Transition avatar={'🖥️'} selected={selected}/>
+                    <div class={`p-1 max-w-lg max-h-lg text-center border-transparent rounded-md`}>
+                      <CountUp 
+                      start={0}
+                      end={1000000 * 6 * 6}
+                      duration={1000 * 6 * 6}
+                      separator=""
+                      decimals={0}
+                      decimal="."
+                      prefix="Checks so far: "
+                      suffix=""
+                      onEnd={() => console.log('Ended! 👏')}
+                      onStart={() => console.log('Started! 💨')}
+                      />
+                    </div>
+                    <ClassicalAlgorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
+                  </div>
+              }
             </div>
           :
             <div className="grid grid-cols-1 grid-rows-12 gap-20 grid-flow-row lg:grid-cols-1">
-              <div class={`p-10 max-w-lg ${colorScheme.box3} border-transparent rounded-md shadow-md space-y-2`}>
-                <div class={`p-2 px-5 max-w-lg max-h-lg ${colorScheme.box9} border-transparent rounded-md shadow-md space-y-2`}>
+              <div class={`p-10 max-w-lg ${colorScheme.box_main} border-transparent rounded-md shadow-md space-y-2`}>
+                <div class={`p-2 px-5 max-w-lg max-h-lg ${colorScheme.box_info} border-transparent rounded-md shadow-md space-y-2`}>
                   <_Tabs />
                 </div>
-                <div class={`p-20 max-w-lg ${colorScheme.box8} border-transparent rounded-md shadow-md space-y-2`}>
+                <div class={`p-20 max-w-lg ${colorScheme.box_choice} border-transparent rounded-md shadow-lg space-y-2`}>
                   <div class={`p-2 text-center max-w-lg  ${colorScheme.box5} border-transparent rounded-md shadow-md space-y-2`}>
                     <em>Your Choice</em>
                   </div>
                   <_RadioGroup selected={selected} setSelected={setSelected} choices={choices} />
                 </div>
-                <div class='text-white text-center'>
+                <div class='text-white text-center p-5'>
                   What is your favorite pokemon?
-                </div>
+                </div >
                 <_Combobox selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} pokemons={pokemons} />
-                <div class={`p-10 max-w-lg ${colorScheme.box5} border-transparent rounded-md shadow-md space-y-2`}>
-                  <_Disclosure questions={questions} answers={answers} />
               </div>
-              </div>
-              <div class={`p-20 max-w-lg ${colorScheme.box6} border-transparent rounded-md shadow-md space-y-2`}>
-              <div class='text-white text-center'>
-                  Are you sure you want to go with {selected.name}?
+              <div class={`p-20 max-w-lg ${colorScheme.box_confirmation} border-transparent rounded-md shadow-md space-y-2`}>
+              <div class='text-white text-center pb-5'>
+                Are you sure you want to go with {selected.name}?
               </div>
                 <_Dialog
                   header='Algorithm choice successfully submitted'
-                  message="You will now be redirected to seperate room to wait for the end of your algorithm's execution."
-                  confirmation='Take me there!'
+                  message="You will now be redirected to a seperate page to wait for the end of your algorithm's execution."
+                  confirmation='Sounds good!'
                   isSubmitted={isSubmitted}
                   setIsSubmitted={setIsSubmitted} />
               </div>
