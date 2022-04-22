@@ -27,7 +27,7 @@ const Algorithm = ({algorithmName, pokemonName}) => {
     },
     {
       id: 3,
-      message: `That is not ${pokemonName}, FAIL`,
+      message: `That is not ${pokemonName}, FAIL #1`,
       trigger: 4,
     },
   ]
@@ -43,37 +43,37 @@ const Algorithm = ({algorithmName, pokemonName}) => {
       if (i % 5 === 0) {
         chatLog.push({
           id: i,
-          message: `Trying my best to find ${pokemonName}, FAIL`,
+          message: `Trying my best to find ${pokemonName}, FAIL #${Math.floor(i / 2)}`,
           trigger: i + 1,
         })
       } else if (i % 19 === 0) {
         chatLog.push({
           id: i,
-          message: `Leaving no stone unturned for ${pokemonName}, FAIL`,
+          message: `Leaving no stone unturned for ${pokemonName}, FAIL #${Math.floor(i / 2)}`,
           trigger: i + 1,
         })
       } else if (i % 39 === 0) {
         chatLog.push({
           id: i,
-          message: `Putting out all the stops for ${pokemonName}, FAIL`,
+          message: `Putting out all the stops for ${pokemonName}, FAIL #${Math.floor(i / 2)}`,
           trigger: i + 1,
         })
       } else if (i % 67 === 0) {
         chatLog.push({
           id: i,
-          message: `Stopping at nothing but ${pokemonName}, FAIL`,
+          message: `Stopping at nothing but ${pokemonName}, FAIL #${Math.floor(i / 2)}`,
           trigger: i + 1,
         })
       } else if (i % 31 === 0) {
       chatLog.push({
         id: i,
-        message: `Putting my soul into finding ${pokemonName}, FAIL`,
+        message: `Putting my soul into finding ${pokemonName}, FAIL #${Math.floor(i / 2)}`,
         trigger: i + 1,
       })
       } else {
         chatLog.push({
           id: i,
-          message: `That is not ${pokemonName}, FAIL`,
+          message: `That is not ${pokemonName}, FAIL #${Math.floor(i / 2)}`,
           trigger: i + 1,
         })    
       }
@@ -82,7 +82,7 @@ const Algorithm = ({algorithmName, pokemonName}) => {
 
   chatLog.push({
         id: 7300,
-        message: `FOUND ${pokemonName}`,
+        message: `FOUND ${pokemonName} after 7300 tries!`,
         end: true,
       })
 
