@@ -26,7 +26,7 @@ const initChatLog = (pokemonName) => {
     })
   chatLog.push({
       id: 2,
-      message: `Looking for ${pokemonName} among first 100000 pokemons. Please be patient.`,
+      message: `Looking for ${pokemonName} among first 10000 pokemons. Please be patient.`,
       trigger: 3,
       delay: 0,
       placeholder: 'Please be patient',
@@ -43,7 +43,7 @@ const initChatLog = (pokemonName) => {
     if (i % 2 === 0) {
       chatLog.push({
         id: i,
-        message: `Looking for ${pokemonName} among the next 100000 pokemons. Please be patient.`,
+        message: `Looking for ${pokemonName} among the next 10000 pokemons. Please be patient.`,
         trigger: i + 1,
         delay: 0,
         placeholder: 'Please be patient',

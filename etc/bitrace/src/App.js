@@ -97,17 +97,19 @@ const App = () => {
                 ?
                   <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box_quantum} border-transparent rounded-md shadow-md space-y-2`}>
                     <_Transition avatar={'⚛️'} selected={selected}/>
+                    <div class={`p-1 max-w-lg max-h-lg text-center border-transparent rounded-md`}>
                     <CountUp 
                       start={0}
-                      end={3600000}
-                      duration={2.75}
-                      separator=" "
-                      decimals={4}
+                      end={10000 * 6 * 6}
+                      duration={10 * 6}
+                      separator=""
+                      decimals={0}
                       decimal=","
-                      prefix="EUR "
-                      suffix=" left"
+                      prefix="Checks so far: "
+                      suffix=""
                       onEnd={() => console.log('Ended! 👏')}
                       onStart={() => console.log('Started! 💨')}/>
+                    </div>
                     <QuantumAlgorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
                   </div>
                 :
@@ -116,8 +118,8 @@ const App = () => {
                     <div class={`p-1 max-w-lg max-h-lg text-center border-transparent rounded-md`}>
                       <CountUp 
                       start={0}
-                      end={1000000 * 6 * 6}
-                      duration={1000 * 6 * 6}
+                      end={10000 * 6 * 6}
+                      duration={100 * 6 * 6}
                       separator=""
                       decimals={0}
                       decimal="."
