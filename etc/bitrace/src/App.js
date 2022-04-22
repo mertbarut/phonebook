@@ -88,7 +88,10 @@ const App = () => {
       <div class="flex-10 grow-0 shrink-0 max-w-3x1 p-20">
         {isSubmitted === true
           ?
-            <div className="grid grid-cols-1 grid-rows-12 gap-20 grid-flow-row lg:grid-cols-1">
+            <div className="grid grid-cols-1 grid-rows-12 gap-5 grid-flow-row lg:grid-cols-1">
+              <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box10} border-transparent rounded-md shadow-md space-y-2`}>
+                <_Transition />
+              </div>
               <Algorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
             </div>
           :
@@ -115,15 +118,12 @@ const App = () => {
               <div class='text-white text-center'>
                   Are you sure you want to go with {selected.name}?
               </div>
-              <_Dialog
-                header='Algorithm choice successfully submitted'
-                message="You will now be redirected to seperate room to wait for the end of your algorithm's execution."
-                confirmation='Take me there!'
-                isSubmitted={isSubmitted}
-                setIsSubmitted={setIsSubmitted} />
-              </div>
-              <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box10} border-transparent rounded-md shadow-md space-y-2`}>
-                <_Transition />
+                <_Dialog
+                  header='Algorithm choice successfully submitted'
+                  message="You will now be redirected to seperate room to wait for the end of your algorithm's execution."
+                  confirmation='Take me there!'
+                  isSubmitted={isSubmitted}
+                  setIsSubmitted={setIsSubmitted} />
               </div>
             </div>
         }

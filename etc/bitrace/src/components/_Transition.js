@@ -19,7 +19,9 @@ const _Transition = () => {
           leaveFrom="opacity-100 rotate-0 scale-100 "
           leaveTo="opacity-0 scale-95 "
         >
-          <div className="w-full h-full bg-white rounded-md shadow-lg" />
+          <div className="w-full h-full bg-white rounded-md shadow-lg">
+            <p className="text-center text-8xl leading-tight"> 🖥️ </p>
+          </div>
         </Transition>
       </div>
 
