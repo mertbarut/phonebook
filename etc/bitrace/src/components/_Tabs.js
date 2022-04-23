@@ -20,8 +20,8 @@ const _Tabs = () => {
         id: 2,
         title: "Mert and Edgars comes to your rescue!",
         content: 'Mert writes a classical algorithm for you that iterates through each pokemon \
-        in the database and compares if it matches your favorite pokemon. \
-        Edgars, always following the latest trends, uses a quantum algorithm, namely Grover\'s algorithm.',
+        in the database and checks if it matches your favorite pokemon. \
+        Edgars, always following the latest trends, utilizes a quantum algorithm, namely Grover\'s algorithm.',
 
         commentCount: 3,
         shareCount: 2,

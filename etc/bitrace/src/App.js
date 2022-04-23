@@ -151,7 +151,7 @@ const App = () => {
                 </div>
                 <div class={`p-20 max-w-lg ${colorScheme.box_choice} border-transparent rounded-md shadow-lg space-y-2`}>
                   <div class={`p-2 text-center max-w-lg  ${colorScheme.box5} border-transparent rounded-md shadow-md space-y-2`}>
-                    It's <em>your</em> decision!
+                    <strong>What do you choose?</strong>
                   </div>
                   <_RadioGroup selected={selected} setSelected={setSelected} choices={choices} />
                 </div>
@@ -177,5 +177,6 @@ const App = () => {
     </div>
   );
 }
+
 
 export default App;
