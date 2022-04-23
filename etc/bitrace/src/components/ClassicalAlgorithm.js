@@ -1,14 +1,13 @@
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
-import { useState, useEffect } from 'react';
 
 const classicalTheme = {
   background: '#f5f8fb',
   fontFamily: 'Helvetica',
-  headerBgColor: '#ef4444',
+  headerBgColor: '#003366',
   headerFontColor: '#fff',
   headerFontSize: '15px',
-  botBubbleColor: '#ef4444',
+  botBubbleColor: '#274CE0',
   botFontColor: '#fff',
   userBubbleColor: '#fff',
   userFontColor: '#4a4a4a',
@@ -19,82 +18,90 @@ const initChatLog = (pokemonName) => {
 
   chatLog.push({
       id: 1,
-      message: `Looking for ${pokemonName} in the database.`,
+      message: `Looking for ${pokemonName} in the database using linear search.`,
       trigger: 2,
-      delay: 0,
+      delay: 500,
       placeholder: 'Please be patient',
     })
   chatLog.push({
       id: 2,
-      message: `Looking for ${pokemonName} among first 10000 pokemons. Please be patient.`,
+      message: `This might take a while. Please be patient.`,
       trigger: 3,
-      delay: 0,
+      delay: 500,
       placeholder: 'Please be patient',
     })
   chatLog.push({
       id: 3,
-      message: `${pokemonName} not found here! Moving on.`,
-      delay: 1000 * 99 / 2,
+      message: `${pokemonName} not found so far! Continuing linear search.`,
+      delay: 500 * 99 / 2,
       trigger: 4,
       placeholder: 'Please be patient',
-    })
+  })
 
   for ( let i = 4; i < 72 + 4; i++) {
     if (i % 2 === 0) {
       chatLog.push({
         id: i,
-        message: `Looking for ${pokemonName} among the next 10000 pokemons. Please be patient.`,
+        message: `Looking for ${pokemonName} among 4294967296 pokemons with no lead! Please be patient.`,
         trigger: i + 1,
-        delay: 0,
+        delay: 500 * 99 / 2,
         placeholder: 'Please be patient',
       })
     } else {
-      if (i % 7 === 0) {
+      if (i % 5 === 0) {
         chatLog.push({
           id: i,
-          message: `Tried my best to find ${pokemonName}, but couldn't. Moving on!`,
+          message: `Worst-case search time: around ~50 days. 👉👈`,
           trigger: i + 1,
-          delay: 1000 * 99 / 2,
+          delay: 500 * 99 / 2,
+          placeholder: 'Please be patient',
+        })
+      } else if (i % 7 === 0) {
+        chatLog.push({
+          id: i,
+          message: `Leaving no 🪨 unturned for ${pokemonName}. Please be patient.`,
+          trigger: i + 1,
+          delay: 500 * 99 / 2,
+          placeholder: 'Please be patient',
+        })
+      } else if (i % 11 === 0) {
+        chatLog.push({
+          id: i,
+          message: `🔥 Everything is fine. Please be patient. `,
+          trigger: i + 1,
+          delay: 500 * 99 / 2,
           placeholder: 'Please be patient',
         })
       } else if (i % 13 === 0) {
         chatLog.push({
           id: i,
-          message: `Left no stone unturned for ${pokemonName}, it just wasn't there. Moving on!`,
+          message: `...no, that's not it either... 💢`,
           trigger: i + 1,
-          delay: 1000 * 99 / 2,
+          delay: 500 * 99 / 2,
           placeholder: 'Please be patient',
         })
       } else if (i % 17 === 0) {
         chatLog.push({
           id: i,
-          message: `Put out all the stops for ${pokemonName}, but it was nowhere to be found. Moving on!`,
+          message: `Stopping at nothing but ${pokemonName}. Please be patient.`,
           trigger: i + 1,
-          delay: 1000 * 99 / 2,
+          delay: 500 * 99 / 2,
           placeholder: 'Please be patient',
         })
       } else if (i % 19 === 0) {
-        chatLog.push({
-          id: i,
-          message: `Stopped at nothing but ${pokemonName}, ready to move on.`,
-          trigger: i + 1,
-          delay: 1000 * 99 / 2,
-          placeholder: 'Please be patient',
-        })
-      } else if (i % 31 === 0) {
       chatLog.push({
         id: i,
-        message: `Put my soul into finding ${pokemonName}, but to no avail. Moving on...`,
+        message: `Putting my digital soul into finding ${pokemonName}. Please be patient.`,
         trigger: i + 1,
-        delay: 1000 * 99 / 2,
+        delay: 500 * 99 / 2,
         placeholder: 'Please be patient',
       })
       } else {
         chatLog.push({
           id: i,
-          message: `Couldn't find ${pokemonName}, moving on...`,
+          message: `Still searching for ${pokemonName}. Please be patient.`,
           trigger: i + 1,
-          delay: 1000 * 99 / 2,
+          delay: 500 * 99 / 2,
           placeholder: 'Please be patient',
         })
       }
@@ -103,7 +110,7 @@ const initChatLog = (pokemonName) => {
 
   chatLog.push({
     id: 76,
-    message: `FOUND ${pokemonName} after 3600000 tries in 1 hour.`,
+    message: `Found ${pokemonName}, at last. Who puts it at the end of the search list?`,
     delay: 1000 * 99 / 2,
     end: true,
     placeholder: '',
@@ -117,6 +124,8 @@ const Algorithm = ({algorithmName, pokemonName}) => {
   return (
     <ThemeProvider theme={classicalTheme}>
       <ChatBot
+        height='300px'
+        bubbleStyle={{ fontSize: '12px' }}
         hideBotAvatar={true}
         botDelay={0}
         headerTitle={algorithmName}

@@ -5,13 +5,16 @@ import { useTimeoutFn } from 'react-use'
 import Timer from 'react-timer-wrapper';
 import Timecode from 'react-timecode';
 
+import qbit from './img/qbit.gif'
+import cbit from './img/cbit.gif'
+
 const _Transition = ({avatar, selected}) => {
   let [isShowing, setIsShowing] = useState(true)
   let [, , resetIsShowing] = useTimeoutFn(() => setIsShowing(true), 500)
 
   return (
     <div className="flex flex-col items-center py-16">
-      <div className="w-32 h-32">
+      <div className="w-32 h-28">
         <Transition
           as={Fragment}
           show={isShowing}
@@ -22,29 +25,36 @@ const _Transition = ({avatar, selected}) => {
           leaveFrom="opacity-100 rotate-0 scale-100 "
           leaveTo="opacity-0 scale-95 "
         >
-          <div className="w-full h-full bg-white rounded-md shadow-lg">
-            <p className="text-center text-8xl leading-tight"> {avatar} </p>
+          <div className="rounded-md object-none">
+            {selected.name.includes('Quantum')
+            ? 
+              <img src={qbit} alt="qbit" className="rounded-full shadow-lg object-none" />
+            : 
+              <img src={cbit} alt="qbit" className="rounded-full shadow-lg object-none" />
+            }
           </div>
         </Transition>
       </div>
 
       <button
         onClick={() => {
-          setIsShowing(false)
-          resetIsShowing()
+          //setIsShowing(false)
+          //resetIsShowing()
         }}
         className="flex items-center px-3 py-2 mt-8 text-sm font-medium text-white transition transform bg-black rounded-full backface-visibility-hidden active:bg-opacity-40 hover:scale-105 hover:bg-opacity-30 focus:outline-none bg-opacity-20"
       >
-        <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5 opacity-70">
-          <path
-            d="M14.9497 14.9498C12.2161 17.6835 7.78392 17.6835 5.05025 14.9498C2.31658 12.2162 2.31658 7.784 5.05025 5.05033C7.78392 2.31666 12.2161 2.31666 14.9497 5.05033C15.5333 5.63385 15.9922 6.29475 16.3266 7M16.9497 2L17 7H16.3266M12 7L16.3266 7"
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" fill="none" className="w-5 h-5 opacity-70">
+          <path 
+            stroke-linecap="round"
+            stroke-linejoin="round"
             stroke="currentColor"
             strokeWidth="1.5"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
 
         <span className="ml-3">
-        <Timer active duration={selected.name.includes('Quantum') ? 61 * 1000 : 3600 * 1000}>
+        <Timer active duration={selected.name.includes('Quantum') ? 2**16 : 2**32 }>
           <Timecode />
         </Timer>
         </span>

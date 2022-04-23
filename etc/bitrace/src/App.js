@@ -12,7 +12,7 @@ import _Tabs from './components/_Tabs';
 import _Transition from './components/_Transition';
 import ClassicalAlgorithm from './components/ClassicalAlgorithm'
 import QuantumAlgorithm from './components/QuantumAlgorithm'
-import CountUp from 'react-countup';
+import { CountUp } from 'use-count-up';
 
 import { useState } from 'react'
 
@@ -28,7 +28,7 @@ const colorScheme = {
   box_info: "bg-slate-200",
   box10: "bg-gradient-to-r from-slate-500 to-slate-300",
   box_quantum: "bg-gradient-to-b from-purple-500 to-violet-300",
-  box_classic: "bg-gradient-to-t from-yellow-200 to-amber-400",
+  box_classic: "bg-gradient-to-l from-yellow-300 to-pink-400",
 }
 
 const questions = [
@@ -43,14 +43,14 @@ const answers = [
 
 const choices = [
   {
-    name: 'Mert\'s Classical Algorithm',
+    name: 'Mert\'s Classical Solution',
     chip: 'Using Linear search',
-    promotion: 'Perfect for old souls',
+    promotion: 'Old but Gold',
   },
   {
-    name: 'Edgars\' Quantum Algorithm',
+    name: 'Edgars\' Quantum Solution',
     chip: 'Using Grover\'s algorithm',
-    promotion: 'Most popular among hipsters',
+    promotion: 'Hip and Cool',
   }
 ]
 
@@ -89,47 +89,57 @@ const App = () => {
 
   return (
     <div class="flex justify-center items-center min-h-screen bg-slate-100">
-      <div class="flex-10 grow-0 shrink-0 max-w-3x1 p-20">
+      <div class="flex-10 grow-0 shrink-0 max-w-3x1 p-5">
         {isSubmitted === true
           ?
-            <div className="grid grid-cols-1 grid-rows-12 gap-5 grid-flow-row lg:grid-cols-1">
+            <div className="grid grid-cols-1 grid-rows-1 gap-5 grid-flow-row lg:grid-cols-1">
               {selected.name.includes('Quantum')
                 ?
                   <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box_quantum} border-transparent rounded-md shadow-md space-y-2`}>
                     <_Transition avatar={'⚛️'} selected={selected}/>
                     <div class={`p-1 max-w-lg max-h-lg text-center border-transparent rounded-md`}>
-                    <CountUp 
-                      start={0}
-                      end={10000 * 6 * 6}
-                      duration={10 * 6}
-                      separator=""
-                      decimals={0}
-                      decimal=","
-                      prefix="Checks so far: "
-                      suffix=""
-                      onEnd={() => console.log('Ended! 👏')}
-                      onStart={() => console.log('Started! 💨')}/>
+                      <CountUp 
+                          isCounting
+                          start={0}
+                          end={2**32}
+                          duration={2**6}
+                          easing={Math.easeOutQuad = function (t, b, c, d) {
+                            t /= d;
+                            return -c * t*(t-2) + b;
+                          }}
+                          thousandsSeparator={' '}
+                          updateInterval={0}
+                          onUpdate={(currentValue) => {
+                            // it will fire once every second
+                          }}
+                          formatter={(value) => value.toFixed(0) + ' Pokemons Searched'}
+                        />
                     </div>
-                    <QuantumAlgorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
+                    <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box_quantum} border-transparent rounded-md shadow-md space-y-2`}>
+                      <QuantumAlgorithm algorithmName={'⚛️ ' + selected.name} pokemonName={selectedPokemon.name}/>
+                    </div>
                   </div>
                 :
                   <div class={`p-4 max-w-lg max-h-lg ${colorScheme.box_classic} border-transparent rounded-md shadow-md space-y-2`}>
                     <_Transition avatar={'🖥️'} selected={selected}/>
                     <div class={`p-1 max-w-lg max-h-lg text-center border-transparent rounded-md`}>
-                      <CountUp 
-                      start={0}
-                      end={10000 * 6 * 6}
-                      duration={100 * 6 * 6}
-                      separator=""
-                      decimals={0}
-                      decimal="."
-                      prefix="Checks so far: "
-                      suffix=""
-                      onEnd={() => console.log('Ended! 👏')}
-                      onStart={() => console.log('Started! 💨')}
-                      />
+                      <CountUp
+                          isCounting
+                          start={0}
+                          end={2**32}
+                          duration={2**22}
+                          easing="linear"
+                          thousandsSeparator={' '}
+                          updateInterval={0}
+                          onUpdate={(currentValue) => {
+                            // it will fire once every second
+                          }}
+                          formatter={(value) => value.toFixed(0) + ' Pokemons Searched'}
+                        />
                     </div>
-                    <ClassicalAlgorithm algorithmName={selected.name} pokemonName={selectedPokemon.name}/>
+                    <div class={`p-4 max-w-lg max-h-sm ${colorScheme.box_main} border-transparent rounded-md shadow-md space-y-2`}>
+                      <ClassicalAlgorithm algorithmName={'🖥️ ' + selected.name} pokemonName={selectedPokemon.name}/>
+                    </div>
                   </div>
               }
             </div>
@@ -141,7 +151,7 @@ const App = () => {
                 </div>
                 <div class={`p-20 max-w-lg ${colorScheme.box_choice} border-transparent rounded-md shadow-lg space-y-2`}>
                   <div class={`p-2 text-center max-w-lg  ${colorScheme.box5} border-transparent rounded-md shadow-md space-y-2`}>
-                    <em>Your Choice</em>
+                    It's <em>your</em> decision!
                   </div>
                   <_RadioGroup selected={selected} setSelected={setSelected} choices={choices} />
                 </div>
